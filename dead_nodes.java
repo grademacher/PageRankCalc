@@ -4,8 +4,10 @@ import java.util.stream.Stream;
 
 public class dead_nodes{
   //file vars
-  private String input_file = "";
+  private String edges_file = "";
+  private String node_names_file = "";
   private String output_file = "";
+  private Map<Integer, Integer> node_list = new HashMap<Integer, Integer>();
 
   public static void main(String[] args) throws IOException{
     //create output file writer
@@ -13,8 +15,17 @@ public class dead_nodes{
     FileWriter output_writer = new FileWriter(output_file);
 
     //create the input stream
-    Stream<Stream> stream = File.lines(Path.get(input_file));
-    stream.filter(line -> !(line.split(" ").length > 1)).forEach(line -> printToFile(line));
+    Stream<Stream> stream = File.lines(Path.get(node_names_file));
+    stream.forEach(line -> node_list.put(Integer.valueOf(line), 0);
+
+    Stream<Stream> stream = File.lines(Path.get(edges_file));
+    stream.forEach(line -> node_list.replace(line.split("")[0], (node_list.get(Integer.valueOf(line.split("")[0]))+1)) );
+
+    for(int i = 0; i < node_list.keySet().size; i++){
+      if(node_list.get(node_list.keySet()[i]) == 0){
+        printToFile("" + node_list.keySet()[i], output_writer);
+      }
+    }
 
     //close the files and stream
     stream.close();
