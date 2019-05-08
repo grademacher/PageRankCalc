@@ -16,7 +16,7 @@ public class dead_nodes{
 
     //create the input stream
     Stream<Stream> stream = File.lines(Path.get(node_names_file));
-    stream.forEach(line -> node_list.put(Integer.valueOf(line.split(" ")[line.split(" ").size - 1]), 0);
+    stream.forEach(line -> node_list.put(Integer.valueOf(line), 0);
 
     Stream<Stream> stream = File.lines(Path.get(edges_file));
     stream.forEach(line -> node_list.replace(line.split("")[0], (node_list.get(Integer.valueOf(line.split("")[0]))+1)) );
