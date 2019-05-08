@@ -30,6 +30,9 @@ public class dead_nodes{
 =======
     Stream<Stream> stream = File.lines(Path.get(input_file));
     stream.filter(line -> line.split(" ").length == 1).forEach(line -> printToFile(line));
+<<<<<<< HEAD
+>>>>>>> parent of d16c9bd... Changed Filter
+=======
 >>>>>>> parent of d16c9bd... Changed Filter
 
     //close the files and stream
