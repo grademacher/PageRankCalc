@@ -15,6 +15,7 @@ public class dead_nodes{
     FileWriter output_writer = new FileWriter(output_file);
 
     //create the input stream
+<<<<<<< HEAD
     Stream<Stream> stream = File.lines(Path.get(node_names_file));
     stream.forEach(line -> node_list.put(Integer.valueOf(line), 0);
 
@@ -26,6 +27,10 @@ public class dead_nodes{
         printToFile("" + node_list.keySet()[i], output_writer);
       }
     }
+=======
+    Stream<Stream> stream = File.lines(Path.get(input_file));
+    stream.filter(line -> line.split(" ").length == 1).forEach(line -> printToFile(line));
+>>>>>>> parent of d16c9bd... Changed Filter
 
     //close the files and stream
     stream.close();
