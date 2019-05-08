@@ -14,7 +14,7 @@ public class dead_nodes{
 
     //create the input stream
     Stream<Stream> stream = File.lines(Path.get(input_file));
-    stream.filter(line -> line.split(" ").length == 1).forEach(line -> printToFile(line));
+    stream.filter(line -> !(line.split(" ").length > 1)).forEach(line -> printToFile(line));
 
     //close the files and stream
     stream.close();
