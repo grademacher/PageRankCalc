@@ -17,13 +17,35 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class PageRank{
   public static class RankMapper extends Mapper<Object, Text, LongWritable, Text>{
     public void map(Object key, Text value, Context context) throws IOException, InterruptedException{
-
+      String[] temp = value.toString().split("[\\s\t]+");
+      String data = "data " + temp[1] + " " + temp[2] + " " + temp[3] + " ";
+      for(int i = 4; i < temp.length; i++){
+        data = data + temp[i] + " ";
+        context.write(new LongWritable(Long.parseLong(temp[i])), new Text(Double.toString(((double) Double.parseDouble(temp[2]) / Double.parseDouble(temp[1])))));
+      }
+      context.write(new LongWritable(Long.parseLong(temp[0])), new Text(data));
     }
   }
 
   public static class RankReducer extends Reducer<LongWritable, Text, LongWritable, Text>{
     public void reduce(LongWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException{
+      String edges = "";
+      String r_new = "";
+      String nodes = "";
+      double increment = 0;
 
+      for(Text info : values){
+        String[] temp = info.toString().split("[\\s\t]+");
+        if(temp[0].equals("data")){
+          edges = temp[1];
+          r_new = temp[3];
+          for(int i = 4; i < temp.length; i++){ nodes += temp[i] + " "; }
+        }else{
+          increment += Double.parseDouble(temp[0]);
+        }
+      }
+
+      context.write(key, new Text(edges + " " + increment + " " + increment + " " + nodes));
     }
   }
 
