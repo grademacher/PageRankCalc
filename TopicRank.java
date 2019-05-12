@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 import java.lang.*;
+import java.net.*;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -38,7 +39,7 @@ public class TopicRank{
           BufferedReader file_reader = new BufferedReader(new InputStreamReader(file_url.openStream()));
           String line;
           while((line = file_reader.readLine()) != null){
-            String temp = line.split("[\\s\t]+");
+            String[] temp = line.split("[\\s\t]+");
             for(int i = 1; i < temp.length; i++){
               hashset.add(temp[i]);
             }
