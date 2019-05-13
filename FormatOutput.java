@@ -30,8 +30,8 @@ public class FormatOutput{
     public void reduce(DoubleWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException{
       if(!file_read){
         try{
-          //URL file_url = new URL("https://s3.amazonaws.com/417pagerank/wiki-topcats-page-names.txt"); not working
-          //URL file_url = new URL("https://s3.amazonaws.com/417pagerankproject/extrainput/wiki-topcats-page-names.txt"); working
+          //URL file_url = new URL("https://s3.amazonaws.com/417pagerank/wiki-topcats-page-names.txt"); //not working
+          URL file_url = new URL("https://s3.amazonaws.com/417pagerankproject/extrainput/wiki-topcats-page-names.txt"); //working
           BufferedReader file_reader = new BufferedReader(new InputStreamReader(file_url.openStream()));
           String line;
           while((line = file_reader.readLine()) != null){
@@ -63,6 +63,7 @@ public class FormatOutput{
 		job.setJarByClass(FormatOutput.class);
 		job.setMapperClass(FormatMapper.class);
 		job.setReducerClass(FormatReducer.class);
+    job.setNumReduceTasks(1);
 		job.setMapOutputKeyClass(DoubleWritable.class);
 		job.setMapOutputValueClass(Text.class);
 		job.setOutputKeyClass(Text.class);

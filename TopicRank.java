@@ -76,8 +76,8 @@ public class TopicRank{
 
   public static void main(String[] args) throws Exception{
     Configuration conf = new Configuration();
-		Job job = Job.getInstance(conf, "Calculate PageRank");
-		job.setJarByClass(PageRank.class);
+		Job job = Job.getInstance(conf, "Calculate TopicRank");
+		job.setJarByClass(TopicRank.class);
 		job.setMapperClass(RankMapper.class);
 		job.setReducerClass(RankReducer.class);
 		job.setMapOutputKeyClass(LongWritable.class);
